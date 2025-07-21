@@ -1,0 +1,105 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+dist/
+build/
+*.spec
+
+# Installer logs
+env.bkp/
+env/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.coverage
+.cache
+.noseids
+*.pyo
+mypy.cache
+.pytest_cache
+*.hypothesis/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# mypy
+.mypy_cache/
+.dmypy.json
+
+# envs
+.env
+.env.*
+*.local
+
+# vscode
+.vscode/
+
+# developer notes
+notes.md
+
+# pycharm
+.idea/
+*.iml
+
+# MacOS
+.DS_Store
+
+# Docker
+docker-compose.dev.yml
+
+# Windows
+Thumbs.db
+
+# AI PACS specific
+data/dicom/
+data/processed/
+data/temp/
+logs/*.log
+temp/*.tmp
+temp/*.temp
+*.dcm
+*.dicom
+models/*.pkl
+models/*.h5
+models/*.pth
+models/weights/
+
