@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  # Base de données PostgreSQL
+  postgres:
+    image: postgres:15
+    container_name: ai_pacs_db
+    environment:
+      POSTGRES_DB: ai_pacs
+      POSTGRES_USER: ai_pacs_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-changeme}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./config/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - ai_pacs_network
+    restart: unless-stopped
+
+  # Application principale
+  ai_pacs_app:
+    build: .
+    container_name: ai_pacs_server
+    environment:
+      - DATABASE_URL=postgresql://ai_pacs_user:${DB_PASSWORD:-changeme}@postgres:5432/ai_pacs
+      - DICOM_AE_TITLE=IA_SERVER
+      - DICOM_PORT=11112
+      - API_PORT=8000
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./config:/app/config
+    ports:
+      - "8000:8000"  # API REST
+      - "11112:11112"  # DICOM C-STORE
+    depends_on:
+      - postgres
+    networks:
+      - ai_pacs_network
+    restart: unless-stopped
+
+  # Redis pour le cache et les tâches asynchrones
+  redis:
+    image: redis:7-alpine
+    container_name: ai_pacs_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - ai_pacs_network
+    restart: unless-stopped
+
+  # Worker pour les tâches IA en arrière-plan
+  ai_worker:
+    build: .
+    container_name: ai_pacs_worker
+    command: python -m src.workers.ai_worker
+    environment:
+      - DATABASE_URL=postgresql://ai_pacs_user:${DB_PASSWORD:-changeme}@postgres:5432/ai_pacs
+      - REDIS_URL=redis://redis:6379/0
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./config:/app/config
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - ai_pacs_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  ai_pacs_network:
+    driver: bridge

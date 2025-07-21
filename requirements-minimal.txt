@@ -1,0 +1,23 @@
+# Dépendances minimales pour tests et développement
+
+# API et Web
+fastapi>=0.100.0
+uvicorn>=0.20.0
+pydantic>=2.0.0
+
+# Base de données (minimal)
+sqlalchemy>=2.0.0
+asyncpg>=0.28.0
+
+# DICOM handling
+pynetdicom>=2.0.0
+pydicom>=2.4.0
+
+# Utilitaires essentiels
+python-dotenv>=1.0.0
+requests>=2.30.0
+
+# Tests
+pytest>=7.4.0
+pytest-asyncio>=0.20.0
+httpx>=0.24.0

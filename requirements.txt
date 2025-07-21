@@ -1,0 +1,52 @@
+# Dépendances principales pour l'application IA Radiologie
+
+# DICOM handling
+pynetdicom==2.0.2
+pydicom==2.4.3
+
+# IA et Machine Learning
+torch>=2.0.0
+torchvision>=0.15.0
+numpy>=1.21.0
+scipy>=1.9.0
+scikit-image>=0.19.0
+opencv-python>=4.5.0
+monai>=1.0.0
+
+# API et Web
+fastapi==0.103.1
+uvicorn==0.23.2
+pydantic==2.3.0
+jinja2==3.1.2
+
+# Base de données
+psycopg2-binary>=2.9.0
+sqlalchemy>=2.0.0
+asyncpg>=0.28.0
+alembic>=1.10.0
+
+# Génération de rapports
+reportlab==4.0.4
+weasyprint==60.0
+markdown==3.4.4
+
+# Sécurité et authentification
+pyjwt==2.8.0
+passlib==1.7.4
+bcrypt==4.0.1
+
+# Utilitaires
+python-dotenv==1.0.0
+requests==2.31.0
+aiofiles==23.2.1
+python-multipart==0.0.6
+
+# Monitoring et logs
+prometheus-client==0.17.1
+loguru==0.7.0
+
+# Tests
+pytest==7.4.2
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0
+httpx==0.24.1
